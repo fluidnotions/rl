@@ -1,0 +1,7 @@
+pytest
+setuptools
+gymnasium
+gymnasium[atari]
+gymnasium[accept-rom-license]
+torch==2.0.0
+ale_py
