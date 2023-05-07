@@ -34,14 +34,15 @@ def run_episode(env, weight):
     between two tensors. It is typically used for linear algebra operations in deep learning models.
     """
     observation, info = env.reset()
-    print(f'observation: type: {type(observation)}, info: {str(info)}')
+    # print(f'observation: type: {type(observation)}, info: {str(info)}')
     total_reward = 0
     is_done = False
     while not is_done:  
         state = torch.from_numpy(observation).float()
         action = torch.argmax(torch.matmul(state, weight))
         observation, supports, reward, is_done, info = env.step(action.item())
-        total_reward += reward
+        if reward:
+            total_reward += 1
         return total_reward
     
 def test_get_observation_space() -> None:
@@ -87,12 +88,13 @@ def test_random_search_policy() -> None:
         for episode in range(n_episode):
             weight = torch.rand(n_state, int(n_action))
             total_reward = run_episode(env, weight)
-            print('Episode {}: {}'.format(episode+1, total_reward))
+            print(f'Episode {episode+1}: {total_reward}')
             if total_reward is not None and total_reward > best_total_reward:
                 best_weight = weight
                 best_total_reward = total_reward
             total_rewards.append(total_reward)
-        print(f'Average total reward over {n_episode} episode: {sum(total_rewards) / n_episode}')    
+        sum_total_rewards = sum(total_rewards)    
+        print(f'Average total reward over {n_episode} episodes: {sum_total_rewards / n_episode}. sum_total_rewards: {sum_total_rewards}, best_total_reward: {best_total_reward}, best_weight: {best_weight}')   
     
 
     

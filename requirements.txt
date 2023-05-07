@@ -1,8 +1,11 @@
 pytest
-setuptools
 gymnasium
 gymnasium[atari]
 gymnasium[accept-rom-license]
 gymnasium[classic-control]
+gymnasium[mujoco]
 torch==2.0.0
 ale_py
+seaborn
+matplotlib
+pandas
