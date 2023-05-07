@@ -13,4 +13,4 @@
 ### Notes
 
 * pip install -r requirements.txt
-* works better on windows (wsl + qwsl doesn't work)
+* works better on windows (WSL + GWSL couldn't get to work in a reasonable amount of time)
